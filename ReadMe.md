@@ -1,70 +1,192 @@
 # EDITH
 
-> Experimental AI Assistant focused on cybersecurity, automation, system interaction, and future AGI-oriented architecture research.
+> A modular AI assistant platform focused on intelligent automation, tool orchestration, and agentic AI research.
 
-## Overview
-
-EDITH is a personal AI assistant project built to explore the intersection of:
-- Artificial Intelligence
-- Cybersecurity
-- Automation
-- Command-line tooling
-- Intelligent system interaction
-
-The project is designed with a modular architecture, allowing different components to evolve independently over time. Current development focuses on backend logic, command execution, network utilities, and foundational AI-agent behavior.
-
-Because apparently building one normal project was too easy. Humanity saw "personal assistant" and immediately decided it should also think, automate, scan networks, and someday possibly question existence. Peak species behavior.
+![Status](https://img.shields.io/badge/Status-Active%20Development-success)
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
-## Features
+## Overview
 
-- Modular AI assistant architecture
-- Command-line interaction system
+EDITH is a modular AI assistant inspired by intelligent virtual assistants such as JARVIS, built to explore autonomous reasoning, intelligent automation, and local AI systems.
+
+Rather than functioning as a traditional chatbot, EDITH is designed as an extensible platform capable of understanding user intent, selecting appropriate tools, executing tasks, and eventually reasoning across multiple steps with persistent memory.
+
+Cybersecurity is one of EDITH's capabilities, alongside automation, system interaction, and intelligent task execution.
+
+The project serves as a long-term research and engineering effort toward building a practical, locally deployable AI assistant.
+
+---
+
+## Current Features
+
+- Modular architecture for scalable development
+- Command parsing and execution
+- Tool-based execution framework
 - Network scanning utilities
-- Automation workflows
-- Backend logic experimentation
-- Extensible command framework
-- AGI-oriented research groundwork
+- WHOIS lookup support
+- Cybersecurity-focused helper tools
+- Local LLM integration (Ollama)
+- Extensible backend architecture
+- Automation-ready design
+
+---
+
+## Planned Features
+
+- Persistent memory system
+- Multi-step reasoning and planning
+- Intelligent tool orchestration
+- Context-aware conversations
+- Plugin architecture
+- File and document analysis
+- Code understanding and review
+- Voice interaction
+- Desktop automation
+- Web interaction
+- Long-term agentic workflows
+
+---
+
+## Architecture
+
+```
+User
+    │
+    ▼
+Intent Recognition
+    │
+    ▼
+Reasoning Layer
+    │
+    ▼
+Planner
+    │
+    ▼
+Tool Registry
+ ├── Network Scanner
+ ├── WHOIS
+ ├── Automation
+ ├── File Analysis
+ ├── Future Plugins
+    │
+    ▼
+Response Generation
+```
+
+The architecture is intentionally modular, allowing new capabilities to be integrated without affecting the core system.
 
 ---
 
 ## Tech Stack
 
 - Python
-- CLI / Terminal-based interaction
-- Networking concepts
-- Cybersecurity fundamentals
-- Modular software architecture
+- Ollama (Local LLMs)
+- FastAPI (planned integrations)
+- Socket Programming
+- Object-Oriented Programming
+- Git & GitHub
+- Modular Software Architecture
+- Automation Workflows
+- Cybersecurity Concepts
+- Networking
+
+---
+
+## Project Structure
+
+```
+edith/
+│
+├── brain/
+├── controller/
+├── tools/
+│   ├── scanner/
+│   ├── whois/
+│   └── future_tools/
+├── memory/
+├── planner/
+├── models/
+├── main.py
+└── requirements.txt
+```
+
+*(Directory structure will continue evolving as the project grows.)*
+
+---
+
+## Roadmap
+
+### Completed
+
+- Modular project architecture
+- Command routing
+- Network scanner integration
+- WHOIS functionality
+- Tool execution framework
+- Local LLM experimentation
+
+### In Progress
+
+- Context handling
+- Persistent memory
+- Intent improvement
+- Tool registry expansion
+
+### Planned
+
+- Autonomous planning
+- Multi-agent workflows
+- Desktop automation
+- Voice interface
+- Long-term memory
+- AR and wearable integration
+- Advanced reasoning engine
+
+---
+
+## Philosophy
+
+EDITH is built around a simple principle:
+
+> **Understand → Reason → Plan → Execute → Learn**
+
+Instead of responding to isolated commands, the long-term objective is to develop an assistant capable of intelligently selecting tools, executing complex workflows, and continuously improving through context and memory.
 
 ---
 
 ## Current Status
 
-EDITH is currently under active development and experimentation.
+**Active Development**
 
-Future goals include:
-- Improved reasoning systems
-- Autonomous task handling
-- Memory systems
-- Expanded cybersecurity utilities
-- Advanced agentic behavior
-- Long-term AGI research implementation
+EDITH is an ongoing research and development project. Features, architecture, and capabilities will continue evolving as new modules are implemented.
 
 ---
 
 ## Project Timeline
 
-Started: **April 2026**
+**April 2026 - Present**
 
 ---
 
 ## Disclaimer
 
-This project is intended for educational, research, and experimental purposes only.
+EDITH is intended for educational, research, and authorized experimentation only.
+
+Users are responsible for ensuring that any cybersecurity or networking functionality is used ethically and in compliance with applicable laws and organizational policies.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
 
 ---
 
 ## Author
 
 **Aviral Mishra**
+
+Computer Science Engineer • AI Developer • Cybersecurity Enthusiast
