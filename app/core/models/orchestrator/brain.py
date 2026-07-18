@@ -1,7 +1,7 @@
 import requests
 import json
-import memory
-from memory import memory
+import app.core.models.memory.memory as memory
+from app.core.models.memory.memory import memory
 import re
 
 OLLAMA_URL = "http://localhost:11434/api/generate"

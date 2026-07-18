@@ -1,11 +1,11 @@
 from socket import socket
 import webbrowser 
-from reasoning import explain_analysis
+from app.core.models.reasoning.reasoning import explain_analysis
 from tools.scanner import run_scan
 from tools.whois import run_whois
 from tools.scanner import scan_ports, analyze_ports, format_report
-from memory import memory
-from reasoning import suggest_actions
+from app.core.models.memory.memory import memory
+from app.core.models.reasoning.reasoning import suggest_actions
 
 def execute_command(data):
     action = data.get("action")
