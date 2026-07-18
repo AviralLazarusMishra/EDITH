@@ -3,6 +3,7 @@ from app.core.models.execution.controller import execute_command
 import requests
 from app.core.models.orchestrator.brain import parse_ai_response
 
+
 def main():
     print("EDITH ONLINE")
 
