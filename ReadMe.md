@@ -1,192 +1,291 @@
 # EDITH
 
-> A modular AI assistant platform focused on intelligent automation, tool orchestration, and agentic AI research.
+> **Enhanced Digital Intelligence for Tactical Handling**
 
-![Status](https://img.shields.io/badge/Status-Active%20Development-success)
-![Python](https://img.shields.io/badge/Python-3.x-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
+A modular AI Operating System built to evolve into a general-purpose autonomous intelligence platform.
 
----
-
-## Overview
-
-EDITH is a modular AI assistant inspired by intelligent virtual assistants such as JARVIS, built to explore autonomous reasoning, intelligent automation, and local AI systems.
-
-Rather than functioning as a traditional chatbot, EDITH is designed as an extensible platform capable of understanding user intent, selecting appropriate tools, executing tasks, and eventually reasoning across multiple steps with persistent memory.
-
-Cybersecurity is one of EDITH's capabilities, alongside automation, system interaction, and intelligent task execution.
-
-The project serves as a long-term research and engineering effort toward building a practical, locally deployable AI assistant.
+Unlike traditional AI assistants, EDITH separates reasoning, planning, memory, execution, perception, and tool usage into independent modules. This modular architecture enables the system to scale without requiring major rewrites, making it suitable for long-term development toward autonomous intelligence.
 
 ---
 
-## Current Features
+# Vision
 
-- Modular architecture for scalable development
-- Command parsing and execution
-- Tool-based execution framework
-- Network scanning utilities
-- WHOIS lookup support
-- Cybersecurity-focused helper tools
-- Local LLM integration (Ollama)
-- Extensible backend architecture
-- Automation-ready design
+EDITH aims to become an extensible AI operating system capable of:
 
----
+- Autonomous reasoning
+- Intelligent task planning
+- Cybersecurity operations
+- Automation
+- Computer Vision
+- Voice Interaction
+- Robotics
+- Hardware Integration
 
-## Planned Features
-
-- Persistent memory system
-- Multi-step reasoning and planning
-- Intelligent tool orchestration
-- Context-aware conversations
-- Plugin architecture
-- File and document analysis
-- Code understanding and review
-- Voice interaction
-- Desktop automation
-- Web interaction
-- Long-term agentic workflows
+The project focuses on creating a production-grade architecture where each capability exists as an independent module working together through a unified execution runtime.
 
 ---
 
-## Architecture
+# Current Development Status
 
-```
-User
-    │
-    ▼
-Intent Recognition
-    │
-    ▼
-Reasoning Layer
-    │
-    ▼
-Planner
-    │
-    ▼
-Tool Registry
- ├── Network Scanner
- ├── WHOIS
- ├── Automation
- ├── File Analysis
- ├── Future Plugins
-    │
-    ▼
-Response Generation
+| Component | Status |
+|-----------|--------|
+| Modular Architecture | ✅ Complete |
+| Configuration System | ✅ Complete |
+| Structured Logging | ✅ Complete |
+| Event System | ✅ Complete |
+| Core Models | ✅ Complete |
+| Runtime Engine | ✅ Complete |
+| Base Engine | ✅ Complete |
+| Tool Framework | ✅ Complete |
+| WHOIS Tool | 🚧 In Progress |
+| Network Scanner | 🚧 In Progress |
+| Planning Engine | 🚧 In Progress |
+| Reasoning Engine | 🚧 In Progress |
+| Memory System | 🚧 In Progress |
+| Local LLM Integration | ⬜ Planned |
+| Computer Vision | ⬜ Planned |
+| Voice Assistant | ⬜ Planned |
+| Hardware Platform | ⬜ Planned |
+
+---
+
+# Architecture
+
+```text
+                    User
+                      │
+                Request Handler
+                      │
+             ┌────────┴────────┐
+             │                 │
+       Planning Engine   Memory Engine
+             │                 │
+             └────────┬────────┘
+                      │
+               Execution Runtime
+                      │
+        ┌─────────────┼─────────────┐
+        │             │             │
+   Tool Registry  Reasoning Engine  Future Modules
+        │             │             │
+        └─────────────┼─────────────┘
+                      │
+             Response Generation
 ```
 
-The architecture is intentionally modular, allowing new capabilities to be integrated without affecting the core system.
+---
+
+# Core Components
+
+## Configuration
+
+Centralized configuration management for application-wide settings.
 
 ---
 
-## Tech Stack
+## Logging
 
-- Python
-- Ollama (Local LLMs)
-- FastAPI (planned integrations)
-- Socket Programming
-- Object-Oriented Programming
-- Git & GitHub
-- Modular Software Architecture
-- Automation Workflows
-- Cybersecurity Concepts
-- Networking
+Structured logging with multiple log levels and production-ready diagnostics.
 
 ---
 
-## Project Structure
+## Event System
 
-```
-edith/
+An internal publish-subscribe architecture allowing components to communicate independently.
+
+---
+
+## Runtime
+
+Responsible for task lifecycle management and execution flow.
+
+---
+
+## Planner
+
+Breaks complex user requests into smaller executable tasks.
+
+---
+
+## Reasoner
+
+Chooses execution strategies before invoking tools.
+
+---
+
+## Memory
+
+Stores and retrieves contextual information to support long-term intelligence.
+
+---
+
+## Tool Registry
+
+Automatically registers and manages available tools.
+
+---
+
+## Execution Engine
+
+Coordinates planning, reasoning, memory, and tools into a unified workflow.
+
+---
+
+# Features
+
+- Modular AI Architecture
+- Runtime Task Execution
+- Event-driven Communication
+- Configuration Management
+- Structured Logging
+- Tool Registry
+- WHOIS Lookup
+- Network Scanner
+- Extensible Plugin System
+- CLI Interface
+- Future REST API Support
+
+---
+
+# Project Structure
+
+```text
+app/
+├── core/
+│   ├── config/
+│   ├── logging/
+│   ├── events/
+│   ├── models/
+│   ├── runtime/
+│   ├── engine/
+│   └── tools/
 │
-├── brain/
-├── controller/
-├── tools/
+├── modules/
 │   ├── scanner/
 │   ├── whois/
-│   └── future_tools/
-├── memory/
-├── planner/
-├── models/
-├── main.py
-└── requirements.txt
+│   ├── reasoning/
+│   ├── planning/
+│   └── memory/
+│
+├── interfaces/
+├── api/
+└── main.py
 ```
-
-*(Directory structure will continue evolving as the project grows.)*
 
 ---
 
-## Roadmap
+# Technology Stack
 
-### Completed
+### Current
 
-- Modular project architecture
-- Command routing
-- Network scanner integration
-- WHOIS functionality
-- Tool execution framework
-- Local LLM experimentation
-
-### In Progress
-
-- Context handling
-- Persistent memory
-- Intent improvement
-- Tool registry expansion
+- Python 3.13+
+- FastAPI
+- AsyncIO
+- Pydantic
+- Rich
+- Typer
+- NumPy
+- Pandas
 
 ### Planned
 
-- Autonomous planning
-- Multi-agent workflows
-- Desktop automation
-- Voice interface
-- Long-term memory
-- AR and wearable integration
-- Advanced reasoning engine
+- OpenAI APIs
+- Hugging Face Transformers
+- PyTorch
+- TensorFlow
+- OpenCV
+- MediaPipe
+- Ultralytics YOLO
 
 ---
 
-## Philosophy
+# Development Roadmap
 
-EDITH is built around a simple principle:
+## Phase 1 - Foundation
 
-> **Understand → Reason → Plan → Execute → Learn**
-
-Instead of responding to isolated commands, the long-term objective is to develop an assistant capable of intelligently selecting tools, executing complex workflows, and continuously improving through context and memory.
-
----
-
-## Current Status
-
-**Active Development**
-
-EDITH is an ongoing research and development project. Features, architecture, and capabilities will continue evolving as new modules are implemented.
+- ✅ Modular Architecture
+- ✅ Configuration
+- ✅ Logging
+- ✅ Event System
 
 ---
 
-## Project Timeline
+## Phase 2 - Runtime
 
-**April 2026 - Present**
-
----
-
-## Disclaimer
-
-EDITH is intended for educational, research, and authorized experimentation only.
-
-Users are responsible for ensuring that any cybersecurity or networking functionality is used ethically and in compliance with applicable laws and organizational policies.
+- ✅ Core Models
+- ✅ Runtime
+- ✅ Base Engine
+- ✅ Tool Framework
 
 ---
 
-## License
+## Phase 3 - Intelligence
+
+- 🚧 Planning Engine
+- 🚧 Reasoning Engine
+- 🚧 Memory Engine
+
+---
+
+## Phase 4 - AI Expansion
+
+- ⬜ Local LLM Support
+- ⬜ Multi-Agent Collaboration
+- ⬜ Persistent Memory
+- ⬜ Autonomous Planning
+
+---
+
+## Phase 5 - Perception
+
+- ⬜ Computer Vision
+- ⬜ Voice Processing
+- ⬜ Sensor Integration
+
+---
+
+## Phase 6 - Hardware
+
+- ⬜ Robotics
+- ⬜ Embedded Systems
+- ⬜ Smart Glasses
+- ⬜ Tactical Platform
+
+---
+
+# Philosophy
+
+EDITH is based on the idea that intelligence is not a single model but a collection of specialized systems working together.
+
+Planning, reasoning, execution, memory, and perception remain independent modules that communicate through well-defined interfaces, making the platform scalable, maintainable, and extensible.
+
+---
+
+# Future Hardware Integration
+
+Planned hardware capabilities include:
+
+- Cameras
+- Microphones
+- Speakers
+- GPS
+- IMU
+- LiDAR
+- Robotic Arms
+- Drones
+- Smart Glasses
+- Embedded Systems
+
+---
+
+# Contributing
+
+Contributions are welcome.
+
+The objective is to create a modular AI operating system where new capabilities can be integrated with minimal changes to the existing architecture.
+
+---
+
+# License
 
 This project is licensed under the MIT License.
-
----
-
-## Author
-
-**Aviral Mishra**
-
-Computer Science Engineer • AI Developer • Cybersecurity Enthusiast
