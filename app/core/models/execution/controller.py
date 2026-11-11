@@ -1,13 +1,19 @@
 import socket
 import webbrowser
+from typing import Any
 
-from app.core.models.memory.memory import memory
+from app.core.models.memory.context import ContextStore
+from app.core.models.memory.memory import get_default_context
 from app.core.models.reasoning.reasoning import explain_analysis, suggest_actions
 from tools.scanner import analyze_ports, format_report, scan_ports
 from tools.whois import run_whois
 
 
-def execute_command(data):
+def execute_command(
+    data: dict[str, Any],
+    context: ContextStore | None = None,
+) -> Any:
+    context = get_default_context() if context is None else context
     action = data.get("action")
 
     if action == "error":
@@ -20,16 +26,20 @@ def execute_command(data):
 
         scan_data = scan_ports(target)
         analysis = analyze_ports(scan_data)
-        memory["last_target"] = target
-        memory["last_scan"] = scan_data
-        memory["last_analysis"] = analysis
+        context.update(
+            {
+                "last_target": target,
+                "last_scan": scan_data,
+                "last_analysis": analysis,
+            }
+        )
 
         if action == "scan":
             return scan_data
         return format_report(analysis)
 
     if action == "explain":
-        analysis = memory["last_analysis"]
+        analysis = context.get("last_analysis")
         if not analysis:
             return "No analysis available."
 
@@ -39,7 +49,7 @@ def execute_command(data):
         return "\n".join(explanations)
 
     if action == "suggest":
-        analysis = memory["last_analysis"]
+        analysis = context.get("last_analysis")
         if not analysis:
             return "Run a scan first before asking for fixes."
         return suggest_actions(analysis)
@@ -54,7 +64,7 @@ def execute_command(data):
         except OSError as error:
             return f"[ERROR] Could not resolve domain: {error}"
 
-        memory["last_target"] = target
+        context.set("last_target", target)
         registry_data = run_whois(target)
         return f"[WHOIS] {target} resolves to {ip}\n{registry_data}"
 
@@ -71,7 +81,7 @@ def execute_command(data):
         return f"[OPEN] Opening {url}"
 
     if action == "assess":
-        analysis = memory["last_analysis"]
+        analysis = context.get("last_analysis")
         if not analysis:
             return "No analysis available."
 

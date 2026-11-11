@@ -29,19 +29,20 @@ The project focuses on creating a production-grade architecture where each capab
 
 | Component | Status |
 |-----------|--------|
-| Modular Architecture | ✅ Complete |
-| Configuration System | ✅ Complete |
-| Structured Logging | ✅ Complete |
-| Event System | ✅ Complete |
-| Core Models | ✅ Complete |
-| Runtime Engine | ✅ Complete |
-| Base Engine | ✅ Complete |
-| Tool Framework | ✅ Complete |
-| WHOIS Tool | 🚧 In Progress |
-| Network Scanner | 🚧 In Progress |
-| Planning Engine | 🚧 In Progress |
-| Reasoning Engine | 🚧 In Progress |
-| Memory System | 🚧 In Progress |
+| Modular Architecture | 🚧 In Progress |
+| Configuration System | ✅ Implemented |
+| Structured Logging | ⬜ Planned |
+| Event System | ⬜ Planned |
+| Request, Task, and Result Models | ✅ Implemented |
+| Core Runtime | ✅ Implemented |
+| Context Interface | ✅ Implemented (in-memory) |
+| Execution Adapter | ✅ Implemented |
+| Tool Registry | ⬜ Planned |
+| WHOIS Integration | ✅ Implemented |
+| Network Scanner | ✅ Implemented |
+| Planning Engine | ⬜ Planned |
+| Reasoning Engine | 🚧 Basic rule-based helpers |
+| Persistent Memory | ⬜ Planned |
 | Local LLM Integration | ⬜ Planned |
 | Computer Vision | ⬜ Planned |
 | Voice Assistant | ⬜ Planned |
@@ -52,26 +53,28 @@ The project focuses on creating a production-grade architecture where each capab
 # Architecture
 
 ```text
-                    User
-                      │
-                Request Handler
-                      │
-             ┌────────┴────────┐
-             │                 │
-       Planning Engine   Memory Engine
-             │                 │
-             └────────┬────────┘
-                      │
-               Execution Runtime
-                      │
-        ┌─────────────┼─────────────┐
-        │             │             │
-   Tool Registry  Reasoning Engine  Future Modules
-        │             │             │
-        └─────────────┼─────────────┘
-                      │
-             Response Generation
+ User input
+     │
+     ▼
+ RequestManager ──► validated RequestModel
+                          │
+                          ▼
+                    CoreRuntime
+                    /    |     \
+                   ▼     ▼      ▼
+             TaskManager Context  Execution adapter
+                                  (parser + legacy controller)
+                                          │
+                                          ▼
+                                   scanner / WHOIS
+                    CoreRuntime ◄── ExecutionResult
+                         │
+                         ▼
+                    CLI response
 ```
+
+The runtime and task registry are synchronous and process-local. Planning, event
+delivery, a tool registry, and persistent memory are not implemented yet.
 
 ---
 
@@ -85,13 +88,13 @@ Centralized configuration management for application-wide settings.
 
 ## Logging
 
-Structured logging with multiple log levels and production-ready diagnostics.
+Structured application logging is planned; current CLI messages use standard output.
 
 ---
 
 ## Event System
 
-An internal publish-subscribe architecture allowing components to communicate independently.
+An event-driven publish-subscribe system is not implemented yet.
 
 ---
 
@@ -103,45 +106,49 @@ Responsible for task lifecycle management and execution flow.
 
 ## Planner
 
-Breaks complex user requests into smaller executable tasks.
+Planning and task decomposition are future work; the current runtime creates one
+task per request.
 
 ---
 
 ## Reasoner
 
-Chooses execution strategies before invoking tools.
+Current reasoning helpers provide static explanations and suggestions for scan
+results; model-based strategy selection is future work.
 
 ---
 
 ## Memory
 
-Stores and retrieves contextual information to support long-term intelligence.
+The context interface currently wraps process-local memory. Persistent memory is
+future work.
 
 ---
 
-## Tool Registry
+## Execution Adapter
 
-Automatically registers and manages available tools.
+Bridges the runtime to the existing command parser and controller. A centralized
+tool registry and permission layer are future work.
 
 ---
 
 ## Execution Engine
 
-Coordinates planning, reasoning, memory, and tools into a unified workflow.
+Coordinates request validation, task lifecycle, context access, execution, and
+standardized results. It does not contain command-specific business logic.
 
 ---
 
 # Features
 
 - Modular AI Architecture
-- Runtime Task Execution
-- Event-driven Communication
+- Validated Requests and Task Lifecycle
+- Centralized Runtime Execution
+- In-memory Context Interface
 - Configuration Management
-- Structured Logging
-- Tool Registry
+- Legacy Execution Adapter
 - WHOIS Lookup
 - Network Scanner
-- Extensible Plugin System
 - CLI Interface
 - Future REST API Support
 
@@ -152,24 +159,17 @@ Coordinates planning, reasoning, memory, and tools into a unified workflow.
 ```text
 app/
 ├── core/
-│   ├── config/
-│   ├── logging/
-│   ├── events/
 │   ├── models/
 │   ├── runtime/
-│   ├── engine/
-│   └── tools/
-│
-├── modules/
-│   ├── scanner/
-│   ├── whois/
-│   ├── reasoning/
-│   ├── planning/
-│   └── memory/
-│
-├── interfaces/
-├── api/
+│   └── ...
+├── infrastructure/
+│   └── config/
+├── engines/
+├── shared/
 └── main.py
+tools/
+├── scanner.py
+└── whois.py
 ```
 
 ---
@@ -178,14 +178,11 @@ app/
 
 ### Current
 
-- Python 3.13+
-- FastAPI
-- AsyncIO
+- Python 3.12+
 - Pydantic
-- Rich
-- Typer
-- NumPy
-- Pandas
+- Pydantic Settings
+- python-dotenv
+- python-whois
 
 ### Planned
 
@@ -212,10 +209,11 @@ app/
 
 ## Phase 2 - Runtime
 
-- ✅ Core Models
-- ✅ Runtime
-- ✅ Base Engine
-- ✅ Tool Framework
+- ✅ Request, task, and execution result models
+- ✅ Synchronous core runtime and task lifecycle
+- ✅ In-memory context interface
+- ✅ Legacy command execution adapter
+- ⬜ Tool registry and permission layer
 
 ---
 

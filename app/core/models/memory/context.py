@@ -1,0 +1,9 @@
+from typing import Any, Protocol
+
+
+class ContextStore(Protocol):
+    def get(self, key: str, default: Any = None) -> Any: ...
+
+    def set(self, key: str, value: Any) -> None: ...
+
+    def update(self, values: dict[str, Any]) -> None: ...

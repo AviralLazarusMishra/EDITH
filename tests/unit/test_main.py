@@ -1,15 +1,26 @@
-import main
+import pytest
+
+from main import main
 
 
-def test_main_preserves_cli_request_loop(monkeypatch, capsys):
-    commands = iter(["scan example.com", "quit"])
+@pytest.mark.parametrize("exit_command", ["quit", "exit"])
+def test_main_preserves_cli_exit_loop(monkeypatch, capsys, exit_command):
+    commands = iter([exit_command])
     monkeypatch.setattr("builtins.input", lambda _: next(commands))
-    monkeypatch.setattr(main, "interpret_command", lambda command: {"command": command})
-    monkeypatch.setattr(main, "execute_command", lambda request: f"handled {request['command']}")
 
-    main.main()
+    main()
 
     output = capsys.readouterr().out
     assert "EDITH ONLINE" in output
-    assert "handled scan example.com" in output
+    assert "EDITH OFFLINE" in output
+
+
+def test_main_reports_invalid_empty_request_and_continues(monkeypatch, capsys):
+    commands = iter(["  ", "quit"])
+    monkeypatch.setattr("builtins.input", lambda _: next(commands))
+
+    main()
+
+    output = capsys.readouterr().out
+    assert "[ERROR] Invalid request:" in output
     assert "EDITH OFFLINE" in output

@@ -1,6 +1,8 @@
 import re
+from typing import Any
 
-from app.core.models.memory.memory import memory
+from app.core.models.memory.context import ContextStore
+from app.core.models.memory.memory import get_default_context
 
 
 def parse_ai_response(response):
@@ -49,7 +51,8 @@ def extract_target(command):
     return None
 
 
-def interpret_command(command):
+def interpret_command(command: str, context: ContextStore | None = None) -> dict[str, Any]:
+    context = get_default_context() if context is None else context
     normalized_command = command.lower()
 
     # --- WHOIS (STRICT MATCH) ---
@@ -70,7 +73,7 @@ def interpret_command(command):
         return {"action": "open", "target": target}
     # --- RESCAN ---
     if "rescan" in normalized_command:
-        target = extract_target(command) or memory["last_target"]
+        target = extract_target(command) or context.get("last_target")
 
         if not target:
             return {"action": "error", "message": "No target available"}
@@ -79,7 +82,7 @@ def interpret_command(command):
 
     # --- SCAN / CHECK ---
     if any(x in normalized_command for x in ["scan", "check", "analyze"]):
-        target = extract_target(command) or memory["last_target"]
+        target = extract_target(command) or context.get("last_target")
 
         if not target:
             return {"action": "error", "message": "No target available"}
@@ -88,7 +91,7 @@ def interpret_command(command):
 
     # --- SAFETY / RISK ---
     if any(x in normalized_command for x in ["safe", "risk", "secure"]):
-        target = memory["last_target"]
+        target = context.get("last_target")
 
         if not target:
             return {"action": "error", "message": "No previous target available"}
