@@ -1,7 +1,5 @@
-from app.core.models.orchestrator.brain import interpret_command
 from app.core.models.execution.controller import execute_command
-import requests
-from app.core.models.orchestrator.brain import parse_ai_response
+from app.core.models.orchestrator.brain import interpret_command
 
 
 def main():
@@ -22,19 +20,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-def interpret_command(command):
-    try:
-        response = requests.post(...)
-        return parse_ai_response(response)
-    except:
-        # fallback
-        parts = command.split()
-
-        if parts[0] == "scan":
-            return {"action": "scan", "target": parts[1]}
-
-        if parts[0] == "check":
-            return {"action": "check", "target": parts[1]}
-
-        return {"action": "unknown"}
